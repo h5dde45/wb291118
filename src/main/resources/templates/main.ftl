@@ -2,10 +2,29 @@
 <html>
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>${some}</p>
-<a href="/greeting?name=asd">greeting</a>
+<div>
+    <form method="post">
+        <input type="text" name="text" placeholder="Enter message">
+        <input type="text" name="tag" placeholder="Enter tag">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div>
+    <form method="post" action="filter">
+        <input type="text" name="filter" placeholder="Enter filter">
+        <button type="submit">Find</button>
+    </form>
+</div>
+<div>List messages</div>
+<#list messages as message>
+<div>
+    <b>${message.id}</b>
+    <span>${message.text}</span>
+    <i>${message.tag}</i>
+</div>
+</#list>
 </body>
 </html>
