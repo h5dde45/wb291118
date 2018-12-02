@@ -1,15 +1,10 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
-<body>
+<#import "parts/common.ftl" as c>
+<#import "parts/logout.ftl" as l>
+
+<@c.page>
 <div>
-    <form action="/logout" method="post">
-        <input type="submit" value="Sign Out"/>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-    </form>
+    <@l.lodout/>
+    <span><a href="/user">Users list</a></span>
 </div>
 <div>
     <form method="post">
@@ -20,20 +15,21 @@
     </form>
 </div>
 <div>
-    <form method="post" action="filter">
-        <input type="text" name="filter" placeholder="Enter filter">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <form method="get" action="/main">
+        <input type="text" name="filter"
+               placeholder="Enter filter" value="${filter!}">
         <button type="submit">Find</button>
     </form>
 </div>
 <div>List messages</div>
-<#list messages as message>
-<div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
-</div>
-</#list>
-</body>
-</html>
+    <#list messages as message>
+    <div>
+        <b>${message.id}</b>
+        <span>${message.text}</span>
+        <i>${message.tag}</i>
+        <strong>${message.authorName}</strong>
+    </div>
+    <#else>
+    No messages
+    </#list>
+</@c.page>

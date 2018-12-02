@@ -20,10 +20,11 @@ public class RegistrationController {
     public String registration() {
         return "registration";
     }
+
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
-        if(userFromDb!=null){
+        if (userFromDb != null) {
             model.addAttribute("message", "User exists..");
             return "registration";
         }
@@ -33,7 +34,6 @@ public class RegistrationController {
 
         return "redirect:/login";
     }
-
 
 
 }
