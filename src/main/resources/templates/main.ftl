@@ -32,6 +32,7 @@
     <b>${message.id}</b>
     <span>${message.text}</span>
     <i>${message.tag}</i>
+    <strong>${message.authorName}</strong>
 </div>
 </#list>
 </body>
