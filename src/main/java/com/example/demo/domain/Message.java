@@ -15,6 +15,8 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
 
+    private byte[] image;
+
     public Message() {
 
     }
@@ -59,5 +61,13 @@ public class Message {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
