@@ -18,6 +18,13 @@
                    placeholder="Enter password.."/>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-sm-1 col-form-label"> Email: </label>
+        <div  class="col-sm-5">
+            <input type="email" name="email" class="form-control"
+                   placeholder="Enter email.."/>
+        </div>
+    </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <div><button type="submit" class="btn btn-info"/>Create</div>
 </form>

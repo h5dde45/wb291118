@@ -27,7 +27,8 @@
             <div class="form-group">
                 <div class="custom-file">
                     <input type="file" id="customFile" name="file">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label class="custom-file-label" for="customFile">
+                        Select the file in png format..</label>
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
