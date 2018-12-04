@@ -6,6 +6,7 @@ import com.example.demo.domain.User;
 import com.example.demo.repos.MailRepo;
 import com.example.demo.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +30,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private MailRepo mailRepo;
+
+    @Value("${hostname}")
+    private String hostname;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -57,8 +61,9 @@ public class UserService implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to WB. Please, visit next link: http://localhost:8080/activate/%s",
+                            "To activate, click on this link: http://%s/activate/%s",
                     user.getUsername(),
+                    hostname,
                     user.getActivationCode()
             );
             Email emailById = mailRepo.getOne(1L);
@@ -104,6 +109,7 @@ public class UserService implements UserDetailsService {
         }
         userRepo.save(user);
     }
+
     public void updateProfile(User user, String password, String email) {
         String userEmail = user.getEmail();
 
@@ -124,7 +130,7 @@ public class UserService implements UserDetailsService {
 
         userRepo.save(user);
 
-        if (isEmailChanged) {
+        if (isEmailChanged || !StringUtils.isEmpty(password)) {
             sendMessage(user);
         }
     }
