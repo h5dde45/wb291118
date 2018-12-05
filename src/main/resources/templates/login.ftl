@@ -1,7 +1,16 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<i>${message!}</i>
+    <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
+    <div class="alert alert-danger" role="alert">
+    ${Session.SPRING_SECURITY_LAST_EXCEPTION.message}
+    </div>
+    </#if>
+    <#if message??>
+    <div class="alert alert-${messageType}" role="alert">
+    ${message}
+    </div>
+    </#if>
 <form action="/login" method="post" class="mt-3">
     <div class="form-group row">
         <label class="col-sm-1 col-form-label"> Username: </label>
