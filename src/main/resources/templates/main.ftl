@@ -32,7 +32,7 @@
             <div class="form-group">
                 <input type="text" name="tag" placeholder="Enter tag"
                        class="form-control  ${(tagError??)?string('is-invalid', '')}"
-                       value="<#if message??>${message.tag}</#if>" >
+                       value="<#if message??>${message.tag}</#if>">
                 <#if tagError??>
                     <div class="invalid-feedback">
                     ${tagError}
@@ -67,7 +67,7 @@
             <div class="card-footer text-muted">
                 <a href="/user-messages/${message.author.id}"> ${message.authorName}</a>
                 <#if message.author.id == currentUserId>
-                    <a class="btn btn-info"
+                    <a class="btn btn-info ml-2"
                        href="/user-messages/${message.author.id}?message=${message.id}">
                         Edit
                     </a>

@@ -113,8 +113,8 @@ public class UserService implements UserDetailsService {
 
         user.getRoles().clear();
 
-        for(String key: form.keySet()){
-            if(roles.contains(key)){
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
                 user.getRoles().add(Role.valueOf(key));
             }
         }
@@ -144,5 +144,17 @@ public class UserService implements UserDetailsService {
         if (isEmailChanged || !StringUtils.isEmpty(password)) {
             sendMessage(user);
         }
+    }
+
+    public void subscribe(User currentUser, User user) {
+        user.getSubscribers().add(currentUser);
+
+        userRepo.save(user);
+    }
+
+    public void unSubscribe(User currentUser, User user) {
+        user.getSubscribers().remove(currentUser);
+
+        userRepo.save(user);
     }
 }

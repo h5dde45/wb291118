@@ -27,7 +27,6 @@
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div><button type="submit" class="btn btn-info"/>Sign In</div>
+    <button type="submit" class="btn btn-info">Sign In</button>
 </form>
-<a href="/registration">Add new user</a>
 </@c.page>

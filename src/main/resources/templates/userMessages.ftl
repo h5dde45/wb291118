@@ -2,10 +2,46 @@
 <#include "parts/security.ftl">
 
 <@c.page>
+
+<div class="alert alert-info mt-3" role="alert">
+    Page by user: <i>${userChannel.username}</i>
+</div>
+    <#if !isCurrentUser>
+        <#if isSubscriber>
+        <a class="btn btn-info" href="/user/unsubscribe/${userChannel.id}">Unsubscribe</a>
+        <#else>
+        <a class="btn btn-info" href="/user/subscribe/${userChannel.id}">Subscribe</a>
+        </#if>
+    </#if>
+<div class="container my-3">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Subscriptions</div>
+                    <h3 class="card-text">
+                        <a href="/user/subscriptions/${userChannel.id}/list">${subscriptionsCount}</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Subscribers</div>
+                    <h3 class="card-text">
+                        <a href="/user/subscribers/${userChannel.id}/list">${subscribersCount}</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <#if isCurrentUser>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample"
        role="button" aria-expanded="false" aria-controls="collapseExample">
-        Add new message
+        Message editor
     </a>
     <div class="collapse  <#if message??>show</#if>" id="collapseExample">
         <div class="form-group mt-3">
@@ -59,7 +95,7 @@
             <div class="card-footer text-muted">
                 <a href="/user-messages/${message.author.id}"> ${message.authorName}</a>
                 <#if message.author.id == currentUserId>
-                    <a class="btn btn-info"
+                    <a class="btn btn-info ml-2"
                        href="/user-messages/${message.author.id}?message=${message.id}">
                         Edit
                     </a>

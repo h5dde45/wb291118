@@ -32,8 +32,8 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-1 col-form-label">Password2:</label>
-        <div class="col-sm-6">
+        <label class="col-sm-1 col-form-label">Password:</label>
+        <div class="col-sm-5">
             <input type="password" name="password2"
                    class="form-control ${(password2Error??)?string('is-invalid', '')}"
                    placeholder="Retype password.." />
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group row">
         <label class="col-sm-1 col-form-label">Email:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <input type="email" name="email"
                    value="<#if user??>${user.email}</#if>"
                    class="form-control ${(emailError??)?string('is-invalid', '')}"
@@ -59,6 +59,6 @@
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div><button type="submit" class="btn btn-info"/>Create</div>
+    <div><button type="submit" class="btn btn-info">Create</button></div>
 </form>
 </@c.page>

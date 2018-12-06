@@ -1,5 +1,4 @@
 <#include "security.ftl">
-<#import "logout.ftl" as l>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">WB</a>
@@ -12,10 +11,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</span></a>
             </li>
+        <#if known>
             <li class="nav-item">
                 <a class="nav-link" href="/main">Messages</span></a>
             </li>
-        <#if user??>
             <li class="nav-item">
                 <a class="nav-link" href="/user-messages/${currentUserId}">My messages</span></a>
             </li>
@@ -25,16 +24,19 @@
                 <a class="nav-link" href="/user">User List</span></a>
             </li>
         </#if>
-        <#if user??>
+        <#if known>
             <li class="nav-item">
                 <a class="nav-link" href="/user/profile">Profile List</span></a>
             </li>
         </#if>
         </ul>
 
-        <div class="navbar-text mr-3">${name}</div>
     <#if known>
-        <@l.lodout/>
+        <div class="navbar-text">${name}</div>
+        <#include "logout.ftl">
+    <#else >
+        <a class="btn btn-success ml-3" href="/registration">Add new user</a>
+        <a class="btn btn-warning ml-3" href="/login">Log In</a>
     </#if>
     </div>
 </nav>
