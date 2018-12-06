@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password2:</label>
+        <label class="col-sm-1 col-form-label">Password2:</label>
         <div class="col-sm-6">
             <input type="password" name="password2"
                    class="form-control ${(password2Error??)?string('is-invalid', '')}"
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Email:</label>
+        <label class="col-sm-1 col-form-label">Email:</label>
         <div class="col-sm-6">
             <input type="email" name="email"
                    value="<#if user??>${user.email}</#if>"
