@@ -4,6 +4,9 @@ import com.example.demo.domain.Message;
 import com.example.demo.domain.User;
 import com.example.demo.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,13 +46,17 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false) String filter, Model model) {
+    public String main(@RequestParam(required = false) String filter,
+                       Model model,
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+    ) {
         if (filter != null && !filter.isEmpty()) {
-            model.addAttribute("messages", messageRepo.findByTag(filter));
+            model.addAttribute("page", messageRepo.findByTag(filter, pageable));
             model.addAttribute("filter", filter);
         } else {
-            model.addAttribute("messages", messageRepo.findAll());
+            model.addAttribute("page", messageRepo.findAll(pageable));
         }
+        model.addAttribute("url", "/main");
         return "main";
     }
 
@@ -59,7 +66,8 @@ public class MainController {
             @Valid Message message,
             BindingResult bindingResult,
             @RequestParam("file") MultipartFile file,
-            Model model) throws IOException {
+            Model model,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) throws IOException {
 
         message.setAuthor(user);
 
@@ -75,7 +83,8 @@ public class MainController {
             model.addAttribute("message", null);
             messageRepo.save(message);
         }
-        model.addAttribute("messages", messageRepo.findAll());
+        model.addAttribute("url", "/main");
+        model.addAttribute("page", this.messageRepo.findAll(pageable));
         return "main";
     }
 
